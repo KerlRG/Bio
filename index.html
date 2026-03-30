@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Александр П. | Фотограф, художник, геймер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            color: #eaeaea;
+            line-height: 1.5;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(160, 0, 255, 0.15), transparent 60%),
+                        radial-gradient(circle at 20% 80%, rgba(200, 0, 255, 0.1), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(8, 8, 12, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 2rem 1.8rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(191, 77, 255, 0.3);
+            border: 1px solid rgba(191, 77, 255, 0.4);
+            transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 30px 55px -12px rgba(160, 0, 255, 0.5), 0 0 0 1px rgba(191, 77, 255, 0.7);
+        }
+
+        /* фото с квадратной неоновой рамкой */
+        .photo {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+            transition: transform 0.25s ease;
+            position: relative;
+            border-radius: 0px;
+            background: #0a0a0a;
+        }
+
+        .photo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff00cc, #bf4dff, #8a2be2, #ff00cc);
+            background-size: 300% 300%;
+            z-index: -2;
+            animation: neonPulse 1.2s ease infinite;
+            border-radius: 0px;
+            box-shadow: 0 0 20px rgba(191, 77, 255, 0.8);
+        }
+
+        .photo::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #e09dff, #bf4dff, #8a2be2);
+            background-size: 300% 300%;
+            z-index: -1;
+            animation: neonPulse 1.2s ease infinite reverse;
+            border-radius: 0px;
+            opacity: 0.7;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            border-radius: 0px;
+        }
+
+        @keyframes neonPulse {
+            0% {
+                opacity: 0.7;
+                background-position: 0% 50%;
+            }
+            50% {
+                opacity: 1;
+                background-position: 100% 50%;
+            }
+            100% {
+                opacity: 0.7;
+                background-position: 0% 50%;
+            }
+        }
+
+        .photo-placeholder {
+            font-size: 3.5rem;
+            opacity: 0.8;
+        }
+
+        .name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #ffffff, #e09dff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(191, 77, 255, 0.3);
+            transition: text-shadow 0.2s;
+        }
+
+        .card:hover .name {
+            text-shadow: 0 0 18px rgba(191, 77, 255, 0.6);
+        }
+
+        .nicknames {
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .nickname {
+            display: inline-block;
+            background: rgba(100, 50, 150, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin: 0.2rem;
+            border: 1px solid rgba(191, 77, 255, 0.4);
+            color: #c4a5ff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+            border-radius: 8px;
+        }
+
+        .nickname:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(191, 77, 255, 0.5);
+            border-color: #e09dff;
+            color: #f0dcff;
+        }
+
+        .tags {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(160, 0, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            border: 1px solid rgba(191, 77, 255, 0.5);
+            color: #e5c0ff;
+            box-shadow: 0 0 8px rgba(191, 77, 255, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+            cursor: default;
+            border-radius: 8px;
+        }
+
+        .tag:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 18px rgba(191, 77, 255, 0.7);
+            border-color: #e09dff;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+            padding: 0 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .card:hover .description {
+            color: #f0f0f0;
+        }
+
+        /* КАСТОМНЫЙ АУДИОПЛЕЕР - ТОЛЬКО КНОПКА PLAY/PAUSE */
+        .audio-player {
+            margin-bottom: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #bf4dff, #8a2be2);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 15px rgba(191, 77, 255, 0.5);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(191, 77, 255, 0.8);
+        }
+
+        .play-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+
+        .track-info {
+            background: rgba(30, 30, 40, 0.5);
+            border: 1px solid rgba(191, 77, 255, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .track-info:hover {
+            border-color: rgba(191, 77, 255, 0.6);
+            box-shadow: 0 0 15px rgba(191, 77, 255, 0.2);
+        }
+
+        .track-title {
+            text-align: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .track-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e09dff;
+            letter-spacing: 0.5px;
+        }
+
+        .track-artist {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+        }
+
+        .track-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.8rem;
+        }
+
+        .music-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(20, 20, 30, 0.6);
+            border: 1px solid rgba(191, 77, 255, 0.3);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #e0e0e0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .music-link:hover {
+            background: rgba(160, 0, 255, 0.3);
+            border-color: #e09dff;
+            color: #f0dcff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 12px rgba(191, 77, 255, 0.4);
+        }
+
+        .gallery-section {
+            margin: 2rem 0;
+        }
+
+        .gallery-title {
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #e09dff;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(191, 77, 255, 0.5);
+            transition: text-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .card:hover .gallery-title {
+            text-shadow: 0 0 15px rgba(191, 77, 255, 0.8);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-grid-item {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid rgba(191, 77, 255, 0.5);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s;
+            background: #0c0c12;
+            border-radius: 12px;
+        }
+
+        .gallery-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-grid-item:hover {
+            transform: scale(1.04);
+            border-color: #e09dff;
+            box-shadow: 0 0 25px rgba(191, 77, 255, 0.7);
+        }
+
+        .gallery-grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .modal-relative-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-image {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            box-shadow: 0 0 40px rgba(191, 77, 255, 0.5);
+            transition: transform 0.1s ease;
+            cursor: zoom-in;
+            border-radius: 12px;
+        }
+
+        .modal-image.zoomed {
+            cursor: zoom-out;
+        }
+
+        .modal-type-badge {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: rgba(191, 77, 255, 0.8);
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+            border-radius: 8px;
+            transition: transform 0.1s ease;
+            transform-origin: left top;
+            white-space: nowrap;
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #aaa;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            transition: transform 0.1s ease;
+            transform-origin: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: bold;
+            transition: 0.2s;
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: #e09dff;
+            transform: scale(1.1);
+            text-shadow: 0 0 10px #bf4dff;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 1px solid rgba(191, 77, 255, 0.7);
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(4px);
+            border-radius: 8px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(191, 77, 255, 0.7);
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 0 20px rgba(191, 77, 255, 0.5);
+        }
+
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            background: rgba(20, 20, 30, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(191, 77, 255, 0.4);
+            padding: 0.7rem 0.5rem;
+            text-decoration: none;
+            color: #eaeaea;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s, border-color 0.2s;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: rgba(160, 0, 255, 0.35);
+            border-color: #e09dff;
+            color: #f0dcff;
+            box-shadow: 0 0 22px rgba(191, 77, 255, 0.6);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #7a6a9a;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(191, 77, 255, 0.3);
+            padding-top: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .card:hover .footer-note {
+            color: #9a8ac0;
+        }
+
+        @media (max-width: 550px) {
+            .card {
+                padding: 1.5rem;
+            }
+            .card:hover {
+                transform: scale(1.005);
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .nickname {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem;
+            }
+            .description {
+                font-size: 1rem;
+            }
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+            }
+            .social-link {
+                font-size: 0.75rem;
+                padding: 0.6rem 0.3rem;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 0.8rem;
+            }
+            .nav-btn {
+                font-size: 1.2rem;
+                padding: 0.3rem 0.7rem;
+            }
+            .photo {
+                width: 130px;
+                height: 130px;
+            }
+            .photo::before {
+                top: -8px;
+                left: -8px;
+                right: -8px;
+                bottom: -8px;
+            }
+            .track-links {
+                gap: 0.6rem;
+            }
+            .music-link {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .track-name {
+                font-size: 0.95rem;
+            }
+            .zoom-hint {
+                font-size: 0.65rem;
+                bottom: -30px;
+                white-space: nowrap;
+            }
+            .modal-type-badge {
+                font-size: 0.65rem;
+                top: -32px;
+            }
+            .play-btn {
+                width: 50px;
+                height: 50px;
+            }
+            .play-btn svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        
+        <div class="photo">
+            <img src="photo.jpg" alt="Александр П." onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷✨</div>';">
+        </div>
+
+        <div class="name">
+            Александр П.
+        </div>
+
+        <div class="nicknames">
+            <span class="nickname">Caesar</span>
+            <span class="nickname">Gambini Coffee</span>
+            <span class="nickname">Artra</span>
+        </div>
+
+        <div class="tags">
+            <span class="tag">📸 фотограф</span>
+            <span class="tag">🎨 художник</span>
+            <span class="tag">🎮 геймер</span>
+        </div>
+
+        <div class="description">
+            📸 фотограф (в душе — художник)<br>
+            🎮 геймер (в душе — тоже художник)<br><br>
+            Смотрю на мир через объектив, дорисовываю то, 
+            чего не хватает, и прохожу игры на максимальной сложности.
+        </div>
+
+        <!-- КАСТОМНЫЙ ПЛЕЕР - ТОЛЬКО КНОПКА PLAY/PAUSE -->
+        <div class="audio-player">
+            <audio id="trackAudio" src="jornr.mp3" preload="none"></audio>
+            <button class="play-btn" id="playBtn">
+                <svg viewBox="0 0 24 24">
+                    <polygon points="5,3 19,12 5,21" fill="white"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="track-info">
+            <div class="track-title">
+                <div class="track-name">🎵 Джинсы или Ньюроки</div>
+                <div class="track-artist">Ara5love, !REVENGE</div>
+            </div>
+            <div class="track-links">
+                <a href="https://vk.com/audio474499219_456923042_47a47b54016289172f" class="music-link" target="_blank">🎧 VK Музыка</a>
+                <a href="https://open.spotify.com/track/3hkHMzygcdtjArmyUZ3pEX" class="music-link" target="_blank">🟢 Spotify</a>
+                <a href="https://music.yandex.com/album/39011782" class="music-link" target="_blank">🔴 Яндекс Музыка</a>
+                <a href="https://soundcloud.com/revengeswag/dzhinsy-ili-nyuroki" class="music-link" target="_blank">☁️ SoundCloud</a>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <div class="gallery-title">
+                📸 мои фотографии
+            </div>
+            <div class="gallery-grid" id="photosGrid"></div>
+        </div>
+
+        <div class="gallery-section">
+            <div class="gallery-title">
+                🎨 мои рисунки
+            </div>
+            <div class="gallery-grid" id="drawingsGrid"></div>
+        </div>
+
+        <div class="links-grid">
+            <a href="https://t.me/artransq" class="social-link" target="_blank">
+                📱 Telegram
+            </a>
+            <a href="https://instagram.com/caesar.72" class="social-link" target="_blank">
+                📷 Instagram
+            </a>
+            <a href="https://discord.com/users/685721544856567934" class="social-link" target="_blank">
+                🎧 Discord
+            </a>
+            <a href="https://github.com/KerlRG" class="social-link" target="_blank">
+                🐙 GitHub
+            </a>
+            <a href="https://www.twitch.tv/artramsm" class="social-link" target="_blank">
+                🟣 Twitch
+            </a>
+            <a href="https://www.xbox.com/ru-RU/play/user/ArtraMsM" class="social-link" target="_blank">
+                🎮 Xbox
+            </a>
+            <a href="https://steamcommunity.com/id/senkowife" class="social-link" target="_blank">
+                💨 Steam
+            </a>
+        </div>
+
+        <div class="footer-note">
+            ⚡ всегда в поиске кадра, цвета и нового уровня ⚡
+        </div>
+    </div>
+</div>
+
+<div id="imageModal" class="modal">
+    <span class="close-modal">&times;</span>
+    <button class="nav-btn prev-btn">◀</button>
+    <div class="modal-content">
+        <div class="modal-relative-container" id="modalRelativeContainer">
+            <div class="modal-type-badge" id="modalTypeBadge">📸 фотография</div>
+            <img id="modalImage" class="modal-image" src="" alt="Full size">
+            <div class="zoom-hint" id="zoomHint">🔍 клик — зум | колесико мыши — масштаб</div>
+        </div>
+    </div>
+    <button class="nav-btn next-btn">▶</button>
+</div>
+
+<script>
+    // АУДИОПЛЕЕР
+    const audio = document.getElementById('trackAudio');
+    const playBtn = document.getElementById('playBtn');
+    let isPlaying = false;
+
+    playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            audio.pause();
+            // меняем иконку на play
+            playBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
+            isPlaying = false;
+        } else {
+            audio.play();
+            // меняем иконку на pause
+            playBtn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>`;
+            isPlaying = true;
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        playBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
+        isPlaying = false;
+    });
+
+    // ГАЛЕРЕЯ
+    const photos = [
+        "images/photo1.jpg",
+        "images/photo2.jpg",
+        "images/photo3.jpg"
+    ];
+
+    const drawings = [
+        "images/lazzy2wice.jpg",
+        "images/lazzy2wice1.png",
+        "images/SAMUELL.png"
+    ];
+
+    let allWorks = [];
+    let currentWorkIndex = 0;
+
+    function buildAllWorks() {
+        allWorks = [];
+        photos.forEach((src, idx) => {
+            allWorks.push({ src: src, type: 'photo', index: idx });
+        });
+        drawings.forEach((src, idx) => {
+            allWorks.push({ src: src, type: 'drawing', index: idx });
+        });
+    }
+
+    function renderGallery() {
+        const photosGrid = document.getElementById('photosGrid');
+        photosGrid.innerHTML = '';
+        photos.forEach((src, idx) => {
+            const item = createGalleryItem(src, idx, 'photo');
+            photosGrid.appendChild(item);
+        });
+
+        const drawingsGrid = document.getElementById('drawingsGrid');
+        drawingsGrid.innerHTML = '';
+        drawings.forEach((src, idx) => {
+            const item = createGalleryItem(src, idx, 'drawing');
+            drawingsGrid.appendChild(item);
+        });
+    }
+
+    function createGalleryItem(src, idx, type) {
+        const item = document.createElement('div');
+        item.className = 'gallery-grid-item';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${type === 'photo' ? 'Фото' : 'Рисунок'} ${idx + 1}`;
+        img.loading = 'lazy';
+        item.appendChild(img);
+        item.addEventListener('click', () => openModalByType(type, idx));
+        return item;
+    }
+
+    function openModalByType(type, idx) {
+        const workIndex = allWorks.findIndex(work => work.type === type && work.index === idx);
+        if (workIndex !== -1) {
+            openModal(workIndex);
+        }
+    }
+
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalTypeBadge = document.getElementById('modalTypeBadge');
+    const zoomHint = document.getElementById('zoomHint');
+    const modalRelativeContainer = document.getElementById('modalRelativeContainer');
+    let zoomLevel = 1;
+
+    function openModal(index) {
+        currentWorkIndex = index;
+        updateModalContent();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        zoomLevel = 1;
+        updateZoomTransform();
+    }
+
+    function updateModalContent() {
+        const work = allWorks[currentWorkIndex];
+        modalImg.src = work.src;
+        modalImg.classList.remove('zoomed');
+        
+        if (work.type === 'photo') {
+            modalTypeBadge.innerHTML = '📸 фотография';
+            modalTypeBadge.style.background = 'rgba(191, 77, 255, 0.8)';
+        } else {
+            modalTypeBadge.innerHTML = '🎨 рисунок';
+            modalTypeBadge.style.background = 'rgba(100, 200, 255, 0.8)';
+        }
+    }
+
+    function updateZoomTransform() {
+        modalImg.style.transform = `scale(${zoomLevel})`;
+        
+        if (modalRelativeContainer) {
+            modalTypeBadge.style.transform = `scale(${zoomLevel})`;
+            zoomHint.style.transform = `translateX(-50%) scale(${zoomLevel})`;
+        }
+        
+        if (zoomLevel === 1) {
+            modalImg.classList.remove('zoomed');
+        } else {
+            modalImg.classList.add('zoomed');
+        }
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        zoomLevel = 1;
+        updateZoomTransform();
+    }
+
+    function nextImage() {
+        currentWorkIndex = (currentWorkIndex + 1) % allWorks.length;
+        updateModalContent();
+        zoomLevel = 1;
+        updateZoomTransform();
+    }
+
+    function prevImage() {
+        currentWorkIndex = (currentWorkIndex - 1 + allWorks.length) % allWorks.length;
+        updateModalContent();
+        zoomLevel = 1;
+        updateZoomTransform();
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    modalImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (zoomLevel === 1) {
+            zoomLevel = 1.8;
+        } else {
+            zoomLevel = 1;
+        }
+        updateZoomTransform();
+    });
+
+    modalImg.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.deltaY < 0) {
+            zoomLevel = Math.min(zoomLevel + 0.2, 3);
+        } else {
+            zoomLevel = Math.max(zoomLevel - 0.2, 0.8);
+        }
+        updateZoomTransform();
+    });
+
+    document.querySelector('.close-modal').addEventListener('click', closeModal);
+    document.querySelector('.prev-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevImage();
+    });
+    document.querySelector('.next-btn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextImage();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+
+    buildAllWorks();
+    renderGallery();
+</script>
+</body>
+</html>
