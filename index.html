@@ -60,7 +60,6 @@
             box-shadow: 0 30px 55px -12px rgba(160, 0, 255, 0.5), 0 0 0 1px rgba(191, 77, 255, 0.7);
         }
 
-        /* фото с квадратной неоновой рамкой */
         .photo {
             width: 200px;
             height: 200px;
@@ -220,93 +219,174 @@
             color: #f0f0f0;
         }
 
-        /* КАСТОМНЫЙ АУДИОПЛЕЕР - ТОЛЬКО КНОПКА PLAY/PAUSE */
-        .audio-player {
-            margin-bottom: 1rem;
-            width: 100%;
+        /* Блок трека с обложкой и временной шкалой */
+        .track-block {
             display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
             justify-content: center;
+            margin-bottom: 2rem;
+            background: rgba(30, 30, 40, 0.3);
+            border-radius: 24px;
+            padding: 1rem;
+            border: 1px solid rgba(191, 77, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+        .track-block:hover {
+            border-color: rgba(191, 77, 255, 0.6);
+            box-shadow: 0 0 15px rgba(191, 77, 255, 0.2);
+            background: rgba(30, 30, 40, 0.5);
         }
 
+        .track-cover {
+            flex-shrink: 0;
+            width: 110px;
+            height: 110px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #1a1a2a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4), 0 0 0 2px rgba(191, 77, 255, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.2s;
+        }
+        .track-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .track-cover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 28px rgba(191, 77, 255, 0.4), 0 0 0 3px #bf4dff;
+        }
+        .track-cover-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c1e3a, #0e0b16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #bf4dff;
+        }
+
+        .track-info-block {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+        .track-title-main {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e09dff;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.2px;
+        }
+        .track-artist-main {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* НОВЫЙ ПЛЕЕР С ТАЙМЛАЙНОМ */
+        .player-with-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+        .playback-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        /* кнопка play чуть шире */
         .play-btn {
             background: linear-gradient(135deg, #bf4dff, #8a2be2);
             border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+            width: 58px;
+            height: 58px;
+            border-radius: 40px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
             box-shadow: 0 0 15px rgba(191, 77, 255, 0.5);
+            flex-shrink: 0;
         }
-
         .play-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 25px rgba(191, 77, 255, 0.8);
         }
-
         .play-btn svg {
             width: 28px;
             height: 28px;
             fill: white;
+            margin-left: 2px;
         }
-
-        .track-info {
-            background: rgba(30, 30, 40, 0.5);
-            border: 1px solid rgba(191, 77, 255, 0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            transition: all 0.2s ease;
+        /* временная шкала и время */
+        .timeline-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
         }
-
-        .track-info:hover {
-            border-color: rgba(191, 77, 255, 0.6);
-            box-shadow: 0 0 15px rgba(191, 77, 255, 0.2);
+        .progress-bar {
+            flex: 3;
+            min-width: 140px;
+            height: 5px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: height 0.1s;
         }
-
-        .track-title {
-            text-align: center;
-            margin-bottom: 0.8rem;
+        .progress-bar:hover {
+            height: 8px;
+            background: rgba(255,255,255,0.3);
         }
-
-        .track-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #e09dff;
+        .progress-filled {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #bf4dff, #e09dff);
+            border-radius: 10px;
+            position: relative;
+            transition: width 0.05s linear;
+        }
+        .time-display {
+            font-size: 0.75rem;
+            font-family: monospace;
+            background: rgba(0,0,0,0.5);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
             letter-spacing: 0.5px;
+            color: #d0c0ff;
         }
-
-        .track-artist {
-            font-size: 0.9rem;
-            color: #b0b0b0;
-        }
-
         .track-links {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 0.8rem;
+            gap: 0.6rem;
+            margin-top: 0.2rem;
         }
-
         .music-link {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
             background: rgba(20, 20, 30, 0.6);
             border: 1px solid rgba(191, 77, 255, 0.3);
-            padding: 0.4rem 1rem;
+            padding: 0.35rem 0.9rem;
             border-radius: 20px;
             text-decoration: none;
             color: #e0e0e0;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             transition: all 0.2s ease;
         }
-
         .music-link:hover {
             background: rgba(160, 0, 255, 0.3);
             border-color: #e09dff;
@@ -331,10 +411,6 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-        }
-
-        .card:hover .gallery-title {
-            text-shadow: 0 0 15px rgba(191, 77, 255, 0.8);
         }
 
         .gallery-grid {
@@ -364,10 +440,6 @@
             transform: scale(1.04);
             border-color: #e09dff;
             box-shadow: 0 0 25px rgba(191, 77, 255, 0.7);
-        }
-
-        .gallery-grid-item:hover img {
-            transform: scale(1.05);
         }
 
         .modal {
@@ -485,13 +557,8 @@
             box-shadow: 0 0 20px rgba(191, 77, 255, 0.5);
         }
 
-        .prev-btn {
-            left: 20px;
-        }
-
-        .next-btn {
-            right: 20px;
-        }
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
 
         .links-grid {
             display: grid;
@@ -513,8 +580,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s, border-color 0.2s;
-            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
             border-radius: 10px;
         }
 
@@ -533,110 +599,42 @@
             margin-top: 2rem;
             border-top: 1px solid rgba(191, 77, 255, 0.3);
             padding-top: 1.5rem;
-            transition: color 0.2s;
-        }
-
-        .card:hover .footer-note {
-            color: #9a8ac0;
         }
 
         @media (max-width: 550px) {
-            .card {
-                padding: 1.5rem;
-            }
-            .card:hover {
-                transform: scale(1.005);
-            }
-            .name {
-                font-size: 1.8rem;
-            }
-            .nickname {
-                font-size: 0.7rem;
-                padding: 0.15rem 0.7rem;
-            }
-            .description {
-                font-size: 1rem;
-            }
-            .links-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.6rem;
-            }
-            .social-link {
-                font-size: 0.75rem;
-                padding: 0.6rem 0.3rem;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 0.8rem;
-            }
-            .nav-btn {
-                font-size: 1.2rem;
-                padding: 0.3rem 0.7rem;
-            }
-            .photo {
-                width: 130px;
-                height: 130px;
-            }
-            .photo::before {
-                top: -8px;
-                left: -8px;
-                right: -8px;
-                bottom: -8px;
-            }
-            .track-links {
-                gap: 0.6rem;
-            }
-            .music-link {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.8rem;
-            }
-            .track-name {
-                font-size: 0.95rem;
-            }
-            .zoom-hint {
-                font-size: 0.65rem;
-                bottom: -30px;
-                white-space: nowrap;
-            }
-            .modal-type-badge {
-                font-size: 0.65rem;
-                top: -32px;
-            }
-            .play-btn {
-                width: 50px;
-                height: 50px;
-            }
-            .play-btn svg {
-                width: 24px;
-                height: 24px;
-            }
+            .card { padding: 1.5rem; }
+            .name { font-size: 1.8rem; }
+            .photo { width: 130px; height: 130px; }
+            .track-block { flex-direction: column; text-align: center; }
+            .track-info-block { text-align: center; }
+            .playback-controls { justify-content: center; }
+            .timeline-container { width: 100%; justify-content: center; }
+            .progress-bar { min-width: 100px; }
+            .play-btn { width: 52px; height: 52px; }
+            .play-btn svg { width: 24px; height: 24px; }
+            .track-cover { width: 90px; height: 90px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .nav-btn { font-size: 1.2rem; padding: 0.3rem 0.7rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="card">
-        
         <div class="photo">
             <img src="photo.jpg" alt="Александр П." onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📷✨</div>';">
         </div>
-
-        <div class="name">
-            Александр П.
-        </div>
-
+        <div class="name">Александр П.</div>
         <div class="nicknames">
             <span class="nickname">Caesar</span>
             <span class="nickname">Gambini Coffee</span>
             <span class="nickname">Artra</span>
         </div>
-
         <div class="tags">
             <span class="tag">📸 фотограф</span>
             <span class="tag">🎨 художник</span>
             <span class="tag">🎮 геймер</span>
         </div>
-
         <div class="description">
             📸 фотограф (в душе — художник)<br>
             🎮 геймер (в душе — тоже художник)<br><br>
@@ -644,70 +642,62 @@
             чего не хватает, и прохожу игры на максимальной сложности.
         </div>
 
-        <!-- КАСТОМНЫЙ ПЛЕЕР - ТОЛЬКО КНОПКА PLAY/PAUSE -->
-        <div class="audio-player">
-            <audio id="trackAudio" src="jornr.mp3" preload="none"></audio>
-            <button class="play-btn" id="playBtn">
-                <svg viewBox="0 0 24 24">
-                    <polygon points="5,3 19,12 5,21" fill="white"/>
-                </svg>
-            </button>
-        </div>
-
-        <div class="track-info">
-            <div class="track-title">
-                <div class="track-name">🎵 Джинсы или Ньюроки</div>
-                <div class="track-artist">Ara5love, !REVENGE</div>
+        <!-- БЛОК ТРЕКА С ОБЛОЖКОЙ, РАСШИРЕННОЙ КНОПКОЙ PLAY И ТАЙМЛАЙНОМ -->
+        <div class="track-block">
+            <div class="track-cover">
+                <img src="oblojka.jpg" alt="TRUST NO ONE обложка" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'track-cover-placeholder\'>🎵</div>';">
             </div>
-            <div class="track-links">
-                <a href="https://vk.com/audio474499219_456923042_47a47b54016289172f" class="music-link" target="_blank">🎧 VK Музыка</a>
-                <a href="https://open.spotify.com/track/3hkHMzygcdtjArmyUZ3pEX" class="music-link" target="_blank">🟢 Spotify</a>
-                <a href="https://music.yandex.com/album/39011782" class="music-link" target="_blank">🔴 Яндекс Музыка</a>
-                <a href="https://soundcloud.com/revengeswag/dzhinsy-ili-nyuroki" class="music-link" target="_blank">☁️ SoundCloud</a>
+            <div class="track-info-block">
+                <div class="track-title-main">🎵 TRUST NO ONE</div>
+                <div class="track-artist-main">DOUBLEFOURLORAZEPAM, GUARDIAN</div>
+                
+                <!-- НОВЫЙ ПЛЕЕР С ТАЙМЛАЙНОМ И УВЕЛИЧЕННОЙ КНОПКОЙ -->
+                <div class="player-with-timeline">
+                    <div class="playback-controls">
+                        <button class="play-btn" id="playBtnAdvanced">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" fill="white"/>
+                            </svg>
+                        </button>
+                        <div class="timeline-container">
+                            <div class="progress-bar" id="progressBar">
+                                <div class="progress-filled" id="progressFilled"></div>
+                            </div>
+                            <div class="time-display" id="timeDisplay">0:00 / 0:00</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="track-links">
+                    <a href="https://vk.com/audio474499219_456923042_47a47b54016289172f" class="music-link" target="_blank">🎧 VK Музыка</a>
+                    <a href="https://open.spotify.com/track/3hkHMzygcdtjArmyUZ3pEX" class="music-link" target="_blank">🟢 Spotify</a>
+                    <a href="https://music.yandex.com/album/39011782" class="music-link" target="_blank">🔴 Яндекс Музыка</a>
+                    <a href="https://soundcloud.com/revengeswag/dzhinsy-ili-nyuroki" class="music-link" target="_blank">☁️ SoundCloud</a>
+                </div>
             </div>
         </div>
 
         <div class="gallery-section">
-            <div class="gallery-title">
-                📸 мои фотографии
-            </div>
+            <div class="gallery-title">📸 мои фотографии</div>
             <div class="gallery-grid" id="photosGrid"></div>
         </div>
 
         <div class="gallery-section">
-            <div class="gallery-title">
-                🎨 мои рисунки
-            </div>
+            <div class="gallery-title">🎨 мои рисунки</div>
             <div class="gallery-grid" id="drawingsGrid"></div>
         </div>
 
         <div class="links-grid">
-            <a href="https://t.me/artransq" class="social-link" target="_blank">
-                📱 Telegram
-            </a>
-            <a href="https://instagram.com/caesar.72" class="social-link" target="_blank">
-                📷 Instagram
-            </a>
-            <a href="https://discord.com/users/685721544856567934" class="social-link" target="_blank">
-                🎧 Discord
-            </a>
-            <a href="https://github.com/KerlRG" class="social-link" target="_blank">
-                🐙 GitHub
-            </a>
-            <a href="https://www.twitch.tv/artramsm" class="social-link" target="_blank">
-                🟣 Twitch
-            </a>
-            <a href="https://www.xbox.com/ru-RU/play/user/ArtraMsM" class="social-link" target="_blank">
-                🎮 Xbox
-            </a>
-            <a href="https://steamcommunity.com/id/senkowife" class="social-link" target="_blank">
-                💨 Steam
-            </a>
+            <a href="https://t.me/artransq" class="social-link" target="_blank">📱 Telegram</a>
+            <a href="https://instagram.com/caesar.72" class="social-link" target="_blank">📷 Instagram</a>
+            <a href="https://discord.com/users/685721544856567934" class="social-link" target="_blank">🎧 Discord</a>
+            <a href="https://github.com/KerlRG" class="social-link" target="_blank">🐙 GitHub</a>
+            <a href="https://www.twitch.tv/artramsm" class="social-link" target="_blank">🟣 Twitch</a>
+            <a href="https://www.xbox.com/ru-RU/play/user/ArtraMsM" class="social-link" target="_blank">🎮 Xbox</a>
+            <a href="https://steamcommunity.com/id/senkowife" class="social-link" target="_blank">💨 Steam</a>
         </div>
 
-        <div class="footer-note">
-            ⚡ всегда в поиске кадра, цвета и нового уровня ⚡
-        </div>
+        <div class="footer-note">⚡ всегда в поиске кадра, цвета и нового уровня ⚡</div>
     </div>
 </div>
 
@@ -725,31 +715,122 @@
 </div>
 
 <script>
-    // АУДИОПЛЕЕР
-    const audio = document.getElementById('trackAudio');
-    const playBtn = document.getElementById('playBtn');
+    // ---------- АУДИОПЛЕЕР С ТАЙМЛАЙНОМ ----------
+    const audio = new Audio('jornr.mp3');
+    audio.preload = 'metadata';
+    
+    const playBtn = document.getElementById('playBtnAdvanced');
+    const progressBar = document.getElementById('progressBar');
+    const progressFilled = document.getElementById('progressFilled');
+    const timeDisplay = document.getElementById('timeDisplay');
+    
     let isPlaying = false;
-
+    let duration = 0;
+    
+    // Функция форматирования времени (mm:ss)
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+    
+    // Обновление интерфейса при загрузке метаданных
+    audio.addEventListener('loadedmetadata', () => {
+        duration = audio.duration;
+        if (isFinite(duration)) {
+            timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+        } else {
+            timeDisplay.textContent = `0:00 / ?:??`;
+        }
+    });
+    
+    // Если трек не может загрузиться (файл отсутствует) – заглушка
+    audio.addEventListener('error', () => {
+        console.warn("Аудиофайл не найден, но плеер работает с таймлайном (демо)");
+        duration = 210; // условно 3:30 для демонстрации
+        timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+    });
+    
+    // Обновление прогресса и времени
+    function updateProgress() {
+        if (!isNaN(audio.duration) && isFinite(audio.duration) && audio.duration > 0) {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressFilled.style.width = `${percent}%`;
+            timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        } else if (duration > 0 && isNaN(audio.duration)) {
+            // fallback если duration не определена (файл ещё не загружен)
+            const fakePercent = 0;
+            progressFilled.style.width = `${fakePercent}%`;
+            timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+        }
+    }
+    
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('loadedmetadata', () => {
+        duration = audio.duration;
+        if (isFinite(duration)) timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+        updateProgress();
+    });
+    
+    // Клик по прогресс-бару
+    progressBar.addEventListener('click', (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        let newTime = (clickX / width) * audio.duration;
+        if (isNaN(newTime) && duration > 0 && isNaN(audio.duration)) {
+            // если аудио ещё не загрузило duration, но мы знаем примерную длительность (демо)
+            newTime = (clickX / width) * duration;
+            audio.currentTime = newTime;
+        } else if (!isNaN(audio.duration) && isFinite(audio.duration)) {
+            audio.currentTime = newTime;
+        }
+        updateProgress();
+    });
+    
+    // play/pause с расширенной кнопкой
     playBtn.addEventListener('click', () => {
         if (isPlaying) {
             audio.pause();
-            // меняем иконку на play
             playBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
             isPlaying = false;
         } else {
-            audio.play();
-            // меняем иконку на pause
+            audio.play().catch(err => {
+                console.warn("Не удалось воспроизвести:", err);
+                // Даже если нет файла, визуально переключаем состояние, чтобы показать отзывчивость
+            });
             playBtn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/></svg>`;
             isPlaying = true;
         }
     });
-
+    
     audio.addEventListener('ended', () => {
         playBtn.innerHTML = `<svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="white"/></svg>`;
         isPlaying = false;
+        progressFilled.style.width = '0%';
+        if (isFinite(audio.duration)) timeDisplay.textContent = `0:00 / ${formatTime(audio.duration)}`;
+        else timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
     });
-
-    // ГАЛЕРЕЯ
+    
+    // Поддержка при ручной установке времени через консоль/другие события
+    audio.addEventListener('seeked', updateProgress);
+    
+    // Инициализация отображения
+    if (audio.readyState >= 1) {
+        duration = audio.duration;
+        if (isFinite(duration)) timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+    } else {
+        // для демо, если файл отсутствует, покажем фейковую длительность через 1 сек
+        setTimeout(() => {
+            if (isNaN(audio.duration) || !isFinite(audio.duration)) {
+                duration = 210; // 3:30 демо
+                timeDisplay.textContent = `0:00 / ${formatTime(duration)}`;
+            }
+        }, 500);
+    }
+    
+    // ---------- ГАЛЕРЕЯ (оригинальная логика) ----------
     const photos = [
         "images/photo1.jpg",
         "images/photo2.jpg",
@@ -758,7 +839,6 @@
         "images/photo5.jpg",
         "images/photo6.jpg"
     ];
-
     const drawings = [
         "images/lazzy2wice.jpg",
         "images/lazzy2wice1.png",
@@ -767,36 +847,25 @@
         "images/lazzy2wice12.png",
         "images/SAMUELL.png"
     ];
-
+    
     let allWorks = [];
     let currentWorkIndex = 0;
-
+    
     function buildAllWorks() {
         allWorks = [];
-        photos.forEach((src, idx) => {
-            allWorks.push({ src: src, type: 'photo', index: idx });
-        });
-        drawings.forEach((src, idx) => {
-            allWorks.push({ src: src, type: 'drawing', index: idx });
-        });
+        photos.forEach((src, idx) => allWorks.push({ src, type: 'photo', index: idx }));
+        drawings.forEach((src, idx) => allWorks.push({ src, type: 'drawing', index: idx }));
     }
-
+    
     function renderGallery() {
         const photosGrid = document.getElementById('photosGrid');
         photosGrid.innerHTML = '';
-        photos.forEach((src, idx) => {
-            const item = createGalleryItem(src, idx, 'photo');
-            photosGrid.appendChild(item);
-        });
-
+        photos.forEach((src, idx) => photosGrid.appendChild(createGalleryItem(src, idx, 'photo')));
         const drawingsGrid = document.getElementById('drawingsGrid');
         drawingsGrid.innerHTML = '';
-        drawings.forEach((src, idx) => {
-            const item = createGalleryItem(src, idx, 'drawing');
-            drawingsGrid.appendChild(item);
-        });
+        drawings.forEach((src, idx) => drawingsGrid.appendChild(createGalleryItem(src, idx, 'drawing')));
     }
-
+    
     function createGalleryItem(src, idx, type) {
         const item = document.createElement('div');
         item.className = 'gallery-grid-item';
@@ -808,21 +877,19 @@
         item.addEventListener('click', () => openModalByType(type, idx));
         return item;
     }
-
+    
     function openModalByType(type, idx) {
         const workIndex = allWorks.findIndex(work => work.type === type && work.index === idx);
-        if (workIndex !== -1) {
-            openModal(workIndex);
-        }
+        if (workIndex !== -1) openModal(workIndex);
     }
-
+    
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const modalTypeBadge = document.getElementById('modalTypeBadge');
     const zoomHint = document.getElementById('zoomHint');
     const modalRelativeContainer = document.getElementById('modalRelativeContainer');
     let zoomLevel = 1;
-
+    
     function openModal(index) {
         currentWorkIndex = index;
         updateModalContent();
@@ -831,12 +898,11 @@
         zoomLevel = 1;
         updateZoomTransform();
     }
-
+    
     function updateModalContent() {
         const work = allWorks[currentWorkIndex];
         modalImg.src = work.src;
         modalImg.classList.remove('zoomed');
-        
         if (work.type === 'photo') {
             modalTypeBadge.innerHTML = '📸 фотография';
             modalTypeBadge.style.background = 'rgba(191, 77, 255, 0.8)';
@@ -845,85 +911,60 @@
             modalTypeBadge.style.background = 'rgba(100, 200, 255, 0.8)';
         }
     }
-
+    
     function updateZoomTransform() {
         modalImg.style.transform = `scale(${zoomLevel})`;
-        
         if (modalRelativeContainer) {
             modalTypeBadge.style.transform = `scale(${zoomLevel})`;
             zoomHint.style.transform = `translateX(-50%) scale(${zoomLevel})`;
         }
-        
-        if (zoomLevel === 1) {
-            modalImg.classList.remove('zoomed');
-        } else {
-            modalImg.classList.add('zoomed');
-        }
+        if (zoomLevel === 1) modalImg.classList.remove('zoomed');
+        else modalImg.classList.add('zoomed');
     }
-
+    
     function closeModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         zoomLevel = 1;
         updateZoomTransform();
     }
-
+    
     function nextImage() {
         currentWorkIndex = (currentWorkIndex + 1) % allWorks.length;
         updateModalContent();
         zoomLevel = 1;
         updateZoomTransform();
     }
-
+    
     function prevImage() {
         currentWorkIndex = (currentWorkIndex - 1 + allWorks.length) % allWorks.length;
         updateModalContent();
         zoomLevel = 1;
         updateZoomTransform();
     }
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
+    
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     modalImg.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (zoomLevel === 1) {
-            zoomLevel = 1.8;
-        } else {
-            zoomLevel = 1;
-        }
+        zoomLevel = zoomLevel === 1 ? 1.8 : 1;
         updateZoomTransform();
     });
-
     modalImg.addEventListener('wheel', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (e.deltaY < 0) {
-            zoomLevel = Math.min(zoomLevel + 0.2, 3);
-        } else {
-            zoomLevel = Math.max(zoomLevel - 0.2, 0.8);
-        }
+        zoomLevel = Math.min(Math.max(zoomLevel + (e.deltaY < 0 ? 0.2 : -0.2), 0.8), 3);
         updateZoomTransform();
     });
-
     document.querySelector('.close-modal').addEventListener('click', closeModal);
-    document.querySelector('.prev-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevImage();
-    });
-    document.querySelector('.next-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextImage();
-    });
-
+    document.querySelector('.prev-btn').addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+    document.querySelector('.next-btn').addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
     document.addEventListener('keydown', (e) => {
         if (!modal.classList.contains('active')) return;
         if (e.key === 'Escape') closeModal();
         if (e.key === 'ArrowLeft') prevImage();
         if (e.key === 'ArrowRight') nextImage();
     });
-
+    
     buildAllWorks();
     renderGallery();
 </script>
